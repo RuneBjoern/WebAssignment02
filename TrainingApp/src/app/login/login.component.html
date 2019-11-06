@@ -1,1 +1,43 @@
-<p>login works!</p>
+<!-- fa pls -->
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!-- animate.css -->
+<link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css" rel="stylesheet" />
+
+<!-- under overlay stuff -->
+<div class="body"></div>
+
+<!-- the panel -->
+<div class="overlay">
+  <div class="ui-panel login-panel animated bounceInDown">
+    <header>
+      <div class="left logo">
+        Workout
+      </div>
+      
+      <div class="right">
+      </div>
+    </header>
+    
+    <div class="login-form">
+      <div class="subtitle">Login or register</div>
+      <input type="text" placeholder="Username" />
+      <input type="text" placeholder="Password" />
+    </div>
+    
+    <footer>
+      <div class="left social-login">
+        <a href="#login" class="ui-button inactive login">Login as guest </a>
+      </div>
+      
+      <div class="right form-actions">
+        <a routerLink="/workout" routerLinkActive="active" class="ui-button inactive login">Login</a>
+        <a href="#register" class="ui-button inactive register">Register</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<!-- get dem fancy typefaces -->
+<script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
