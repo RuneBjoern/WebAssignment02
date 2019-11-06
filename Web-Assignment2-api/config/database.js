@@ -1,10 +1,7 @@
 //Set up mongoose connection
 console.log('in db config');
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb://localhost/node_rest_api';
-mongoose.connect(mongoDB);
+mongoose.connect('mongodb+srv://Santa:christmas@santacluster-membv.mongodb.net/test?retryWrites=true&w=majority');
 mongoose.Promise = global.Promise;
 
 module.exports = mongoose;
-/*const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));*/
