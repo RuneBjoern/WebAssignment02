@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/services/api.service';
+import { User } from 'src/app/user';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,35 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TrainingApp';
+
+  user: User[] = [] 
+  headers: string[];
+
+  constructor(private api: ApiService) {}
+
+  ngOnInit(){
+    this.getUsers();
+
+  }
+
+  getUsers(){
+    this.api.getUser()
+      .subscribe(resp => {
+        console.log(resp);
+        const keys = resp.headers.keys();
+
+        this.headers = keys.map(key => `${key}: ${resp.headers.get(key)}`);
+
+        for (const data of resp.body){
+          this.user.push(data);
+        }      
+        console.log(this.user);
+      })
+  }
+
+  getUserByID(id: any){
+    this.api.getUserById(id)
+      .subscribe(data=>{ console.log(data);
+      });
+  }
 }
