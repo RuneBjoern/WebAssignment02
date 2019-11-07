@@ -4,7 +4,12 @@ import { User } from 'src/app/user'
 import { Observable, of } from 'rxjs';
 import { retry, catchError} from 'rxjs/operators'; 
 
-//Ref: API calls: https://www.djamware.com/post/5d8d7fc10daa6c77eed3b2f2/angular-8-tutorial-rest-api-and-httpclient-examples
+// Ref: API calls: https://www.djamware.com/post/5d8d7fc10daa6c77eed3b2f2/angular-8-tutorial-rest-api-and-httpclient-examples
+
+// Change header settings, by adding:
+// "httpOptions.headers = httpOptions.headers.set('Authorization', 'my-new-auth-token');"
+// befor 'return'-call in CRUD functions.
+
 
 const localUrl = 'assets/data/user.json';
 
@@ -24,7 +29,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
 
-  // Change header settings befor "return" with: "httpOptions.headers = httpOptions.headers.set('Authorization', 'my-new-auth-token');"
+ 
   getUser(): Observable<any>{
     return this.http.get<User[]>(localUrl, httpOptions)
       .pipe(retry(3), catchError(this.handleError<User[]>('getUser', [])));
@@ -42,8 +47,14 @@ export class ApiService {
 
   updateUser(id: any, user: User): Observable<User>{
       return this.http.put<User>(localUrl + id, user, httpOptions)
-        .pipe(catchError(this.handleError('addUser', user)));
+        .pipe(catchError(this.handleError('updateUser', user)));
   }
+
+  deleteUser(id: any): Observable<User>{
+      return this.http.delete<User>(localUrl + id, httpOptions)
+        .pipe(catchError(this.handleError('deleteUser', id)));
+  }
+
 
 
   private handleError<T>(operation = 'operation', result?:T){

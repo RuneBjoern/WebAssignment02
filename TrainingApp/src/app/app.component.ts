@@ -51,7 +51,13 @@ export class AppComponent {
 
   updateUser(id:any){
     this.api.updateUser(id, this.postdata)
-      .subscribe(resp => {return this.spresp.push(resp)})
+      .subscribe(resp => {return this.spresp.push(resp)
+      });
   }
 
+  deleteUser(id: any){
+    this.api.deleteUser(id)
+      .subscribe(resp => {return this.spresp.push(resp);
+      });
+  }
 }
