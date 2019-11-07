@@ -22,8 +22,13 @@ module.exports = {
 				for (let workout of workouts) {
 					workoutList.push({id: workout._id, workoutname: workout.workoutname, ownerId: workout.ownerId});
 				}
+				console.log(res.status.message)
+				console.log(res.message)
+				console.log(res.data)	
 				res.json({status:"success", message: "All workouts list", data:{workouts: workoutList}});
-							
+				console.log(res.status.message)
+				console.log(res.message)
+				console.log(res.data)			
 			}
 
 		});

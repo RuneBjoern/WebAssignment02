@@ -7,8 +7,11 @@ const workoutVal = require('./routes/workoutVal') ;
 const users = require('./routes/users');
 const bodyParser = require('body-parser');
 const mongoose = require('./config/database'); //database configuration
+const cors = require('cors');
 var jwt = require('jsonwebtoken');
 const app = express();
+
+app.use(cors())
 
 app.set('secretKey', 'nodeRestApi'); // jwt secret token
 
@@ -63,6 +66,7 @@ app.use(function(err, req, res, next) {
     res.status(500).json({message: "Error"});
 
 });
+
 
 app.listen(5000, function(){
 	console.log('Node server listening on port 5000');

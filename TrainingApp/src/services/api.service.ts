@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/user'
 import { Observable, of } from 'rxjs';
 import { retry, catchError} from 'rxjs/operators'; 
+import { Workout } from 'src/app/workout';
 
 // Ref: API calls: https://www.djamware.com/post/5d8d7fc10daa6c77eed3b2f2/angular-8-tutorial-rest-api-and-httpclient-examples
 
@@ -11,12 +12,12 @@ import { retry, catchError} from 'rxjs/operators';
 // befor 'return'-call in CRUD functions.
 
 
-const localUrl = 'assets/data/user.json';
+const localUrl = 'http://localhost:5000/workouts';
 
 const httpOptions ={
   headers: new HttpHeaders({
-    'Content-Type': 'application/xml',
-    'Authorization': 'jwt-token'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
   })
 };
 
@@ -29,7 +30,11 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
 
- 
+  getWorkout(): Observable<any>{
+    return this.http.get<Workout>(localUrl, httpOptions)
+    .pipe(retry(3), catchError(this.handleError<User[]>('getWorkout', [])));
+  }
+
   getUser(): Observable<any>{
     return this.http.get<User[]>(localUrl, httpOptions)
       .pipe(retry(3), catchError(this.handleError<User[]>('getUser', [])));

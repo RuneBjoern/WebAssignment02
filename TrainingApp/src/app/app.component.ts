@@ -18,8 +18,26 @@ export class AppComponent {
   constructor(private api: ApiService) {}
 
   ngOnInit(){
-    this.getUsers();
+    this.getWorkouts();
+    
+  }
+  getWorkouts(){
+    this.api.getWorkout()
+    .subscribe(data => {
+      console.log(data);
+/*         const keys = resp.headers.keys();
 
+        this.headers = keys.map(key => `${key}: ${resp.headers.get(key)}`);
+
+        for (const data of resp.body){
+          this.user.push(data);
+        }      
+        console.log(this.user); */
+      }, err => {
+        console.log(err.message)
+      }, () => {
+        console.log("Complete")
+      });
   }
 
   getUsers(){

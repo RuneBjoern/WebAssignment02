@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/services/api.service';
 
 @Component({
   selector: 'app-workout',
@@ -6,10 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workout.component.scss']
 })
 export class WorkoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private api: ApiService) {}
+  public aa = []
+  ngOnInit(){
+    this.getWorkouts();
+    
+  }
+  getWorkouts(){
+    this.api.getWorkout()
+    .subscribe(data => {
+      data.data.workouts.forEach( w => {
+        
+      this.aa.push(w)
+      });
+      console.log(this.aa)
+      }, err => {
+        console.log(err.message)
+      }, () => {
+        console.log("Complete")
+      });
   }
 
 }
