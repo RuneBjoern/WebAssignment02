@@ -22,17 +22,17 @@ export class AppComponent {
 
   getUsers(){
     this.api.getUser()
-      .subscribe(resp => {
-        console.log(resp);
-        const keys = resp.headers.keys();
+    .subscribe(data => {
+      console.log(data);
+/*         const keys = resp.headers.keys();
 
         this.headers = keys.map(key => `${key}: ${resp.headers.get(key)}`);
 
         for (const data of resp.body){
           this.user.push(data);
         }      
-        console.log(this.user);
-      })
+        console.log(this.user); */
+      });
   }
 
   getUserByID(id: any){
