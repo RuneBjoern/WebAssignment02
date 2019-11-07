@@ -11,7 +11,9 @@ export class AppComponent {
   title = 'TrainingApp';
 
   user: User[] = [] 
-  headers: string[];
+  //headers: string[];
+  spresp: any;
+  postdata: User;
 
   constructor(private api: ApiService) {}
 
@@ -37,7 +39,19 @@ export class AppComponent {
 
   getUserByID(id: any){
     this.api.getUserById(id)
-      .subscribe(data=>{ console.log(data);
+      .subscribe(data => { console.log(data);
       });
   }
+
+  addUser(){
+    this.api.addUser(this.postdata)
+      .subscribe(resp => {return this.spresp.push(resp)
+      });
+  }
+
+  updateUser(id:any){
+    this.api.updateUser(id, this.postdata)
+      .subscribe(resp => {return this.spresp.push(resp)})
+  }
+
 }

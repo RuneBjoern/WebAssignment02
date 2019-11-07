@@ -40,6 +40,11 @@ export class ApiService {
         .pipe(catchError(this.handleError('addUser',user)));
   }
 
+  updateUser(id: any, user: User): Observable<User>{
+      return this.http.put<User>(localUrl + id, user, httpOptions)
+        .pipe(catchError(this.handleError('addUser', user)));
+  }
+
 
   private handleError<T>(operation = 'operation', result?:T){
     return (error: any): Observable<T> => {
