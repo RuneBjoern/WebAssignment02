@@ -9,6 +9,10 @@
 
 <!-- the panel -->
 <div class="overlay">
+
+    
+
+
   <div class="ui-panel login-panel animated bounceInDown">
     <header>
       <div class="left logo">
@@ -22,18 +26,33 @@
     <div class="login-form">
       <div class="subtitle">Login or register</div>
       <input type="text" placeholder="Username" />
+      <ng-container *ngIf="show">
+          <input type="text" placeholder="E-Mail" />
+      </ng-container>
       <input type="text" placeholder="Password" />
+      <ng-container *ngIf="show">
+          <input type="text" placeholder="Repeat Password" />
+      </ng-container>
     </div>
     
     <footer>
       <div class="left social-login">
           <a routerLink="/workout" routerLinkActive="active" class="ui-button inactive login">Login as guest </a>
       </div>
+      <ng-container *ngIf="show">
+          <div class="right form-actions">
+              <a (click)="toggle()" routerLinkActive="active" class="ui-button inactive login">Login</a>
+              <a routerLink="/workout" class="ui-button inactive register">Register</a>
+            </div>
+      </ng-container>
+      <ng-container *ngIf="!show">
+          <div class="right form-actions">
+              <a  routerLink="/workout" routerLinkActive="active" class="ui-button inactive register">Login</a>
+              <a (click)="toggle()" class="ui-button inactive login">Register</a>
+            </div>
+      </ng-container>
       
-      <div class="right form-actions">
-        <a routerLink="/workout" routerLinkActive="active" class="ui-button inactive login">Login</a>
-        <a href="#register" class="ui-button inactive register">Register</a>
-      </div>
+
     </footer>
   </div>
 </div>
@@ -41,3 +60,5 @@
 <!-- get dem fancy typefaces -->
 <script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+

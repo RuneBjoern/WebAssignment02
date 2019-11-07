@@ -10,8 +10,12 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
-
+  public show:boolean = false;
+  
   ngOnInit() {
+  }
+  toggle() {
+    this.show = !this.show;
   }
 
 }
