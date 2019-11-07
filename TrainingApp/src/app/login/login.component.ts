@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     console.log(formData)
     if(formData.repPassword){
       console.log("Registering");
+      this.register(formData.username, formData.email, formData.password, formData.repPassword)
     } else {
       console.log("Logging in...");
       return this.login(formData.email, formData.password)
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(_email, _password){
-    console.log("ll")
+    console.log("login")
     this.api.authUser({email: _email, password:_password})
     .subscribe(data => {
       try{
@@ -50,17 +51,21 @@ export class LoginComponent implements OnInit {
       });
   }
   
-  register(username, email, password, rpassword){
+  register(_username, _email, _password, _rpassword){
+    if(_password == _rpassword){
+    console.log("register")
+      this.api.registerUser({username: _username, email: _email, password: _password})
+      .subscribe(data => {
+        if(data.status == "success"){
+          this.login(_email, _password);
+        } else {
+          this.error = "Wtf?";
+        }
+        });
+    } else {
+      this.error = "Pass do'nt match";
+    }
     
-    this.api.authUser({email: "ej@med.dig", password:"123bosse"})
-    .subscribe(data => {
-      if(data.data.user){
-        localStorage.setItem('JWT', data.data.token);
-        this.router.navigate(['/workout'])
-      } else {
-        this.error = "Wrong pass/email";
-      }
-      });
   }
 
   guest(){

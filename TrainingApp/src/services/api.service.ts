@@ -13,9 +13,11 @@ import { Exercise } from 'src/app/exercise';
 // befor 'return'-call in CRUD functions.
 
 
-const localUrl = 'http://localhost:5000/';
-const workoutsUrl = localUrl + 'workouts';
-const authUrl = localUrl + 'users/authenticate';
+const localUrl = 'http://localhost:5000';
+const workoutsUrl = localUrl + '/workouts';
+const userUrl = '/users';
+const authUrl = localUrl + userUrl + '/authenticate';
+const regUrl = localUrl + userUrl + '/register';
 
 const httpOptions ={
   headers: new HttpHeaders({
@@ -35,11 +37,14 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   authUser(user: User): Observable<any>{
-    console.log(user);    
-    const auth = this.http.post(authUrl, user, httpOptions)
+    return this.http.post(authUrl, user, httpOptions)
     .pipe(retry(3), catchError(this.handleError<User[]>('authUser', [])));
-    httpOptions.headers.set('x-access-token', "");
-    return auth;
+  }
+
+  registerUser(user: User): Observable<any>{
+    console.log(user)
+    return this.http.post(regUrl, user, httpOptions)
+    .pipe(retry(3), catchError(this.handleError<User[]>('registerUser', [])));
   }
 
   getWorkout(): Observable<any>{
@@ -47,34 +52,10 @@ export class ApiService {
     .pipe(retry(3), catchError(this.handleError<User[]>('getWorkout', [])));
   }
 
-  getExercises(): Observable<any>{
-    return this.http.get<Exercise>(localUrl, httpOptions)
-    .pipe(retry(3), catchError(this.handleError<User[]>('getWorkout', [])));
-  }
-
-  getUser(): Observable<any>{
-    return this.http.get<User[]>(localUrl, httpOptions)
-      .pipe(retry(3), catchError(this.handleError<User[]>('getUser', [])));
-  }
-
-  getUserById(id: any): Observable<any>{
-    return this.http.get<User>(localUrl + id)
-      .pipe(retry(3), catchError(this.handleError<User>('getUser')));
-  }
-
-  addUser(user: User): Observable<User>{
-      return this.http.post<User>(localUrl, user, httpOptions)
-        .pipe(catchError(this.handleError('addUser',user)));
-  }
-
-  updateUser(id: any, user: User): Observable<User>{
-      return this.http.put<User>(localUrl + id, user, httpOptions)
-        .pipe(catchError(this.handleError('updateUser', user)));
-  }
-
-  deleteUser(id: any): Observable<User>{
-      return this.http.delete<User>(localUrl + id, httpOptions)
-        .pipe(catchError(this.handleError('deleteUser', id)));
+  postWorkout(workout: Workout): Observable<any>{
+    httpOptions.headers.set('x-access-token', localStorage.getItem("JWT"))
+    return this.http.post(workoutsUrl, workout, httpOptions)
+    .pipe(retry(3), catchError(this.handleError<User[]>('postWorkout', [])));
   }
 
 

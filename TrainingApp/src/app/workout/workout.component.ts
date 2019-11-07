@@ -15,6 +15,11 @@ export class WorkoutComponent implements OnInit {
     this.getWorkouts();
     
   }
+
+  createWorkout(){
+    console.log("Creating workout")
+    this.api.postWorkout({workoutname: "Ny", ownerId: localStorage.getItem('user')})
+  }
   
   getWorkouts(){
     this.api.getWorkout()
