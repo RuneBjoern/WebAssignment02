@@ -1,64 +1,80 @@
 <!-- fa pls -->
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link
+  href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+  rel="stylesheet"
+/>
 
 <!-- animate.css -->
-<link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css" rel="stylesheet" />
+<link
+  href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css"
+  rel="stylesheet"
+/>
 
 <!-- under overlay stuff -->
 <div class="body"></div>
 
 <!-- the panel -->
+
 <div class="overlay">
-
-    
-
-
   <div class="ui-panel login-panel animated bounceInDown">
+    
     <header>
       <div class="left logo">
         Workout
       </div>
-      
-      <div class="right">
-      </div>
+
+      <div class="right"></div>
     </header>
-    
+    <form #login="ngForm" (ngSubmit)="logOrReg(login.value)">
     <div class="login-form">
       <div class="subtitle">Login or register</div>
-      <input type="text" placeholder="Username" />
-      <ng-container *ngIf="show">
-          <input type="text" placeholder="E-Mail" />
-      </ng-container>
-      <input type="text" placeholder="Password" />
-      <ng-container *ngIf="show">
-          <input type="text" placeholder="Repeat Password" />
-      </ng-container>
+      
+        <ng-container *ngIf="show">
+          <input type="text" placeholder="Username" name="username" ngModel />
+        </ng-container>
+        <input type="text" placeholder="E-Mail" name="email" ngModel />
+        <input type="text" placeholder="Password" name="password" ngModel />
+        <ng-container *ngIf="show">
+          <input type="text" placeholder="Repeat Password" name="repPassword" ngModel />
+        </ng-container>
+        
+        
     </div>
-    
+  
     <footer>
       <div class="left social-login">
-          <a routerLink="/workout" routerLinkActive="active" class="ui-button inactive login">Login as guest </a>
+        <a
+          (click) = "guest()"
+          class="ui-button inactive login"
+          >Login as guest
+        </a>
       </div>
       <ng-container *ngIf="show">
-          <div class="right form-actions">
-              <a (click)="toggle()" routerLinkActive="active" class="ui-button inactive login">Login</a>
-              <a routerLink="/workout" class="ui-button inactive register">Register</a>
-            </div>
+        <div class="right form-actions">
+            <input (click) = "toggle()" value = "Login" class="ui-button inactive login"> 
+            <input type = "submit" value = "Register" class="ui-button inactive register"> 
+        </div>
       </ng-container>
       <ng-container *ngIf="!show">
-          <div class="right form-actions">
-              <a  routerLink="/workout" routerLinkActive="active" class="ui-button inactive register">Login</a>
-              <a (click)="toggle()" class="ui-button inactive login">Register</a>
-            </div>
+        <div class="right form-actions">
+          <input type = "submit" value = "Login" class="ui-button inactive register"> 
+          <input (click) = "toggle()" value = "Register" class="ui-button inactive login"> 
+        </div>
       </ng-container>
       
-
+      
+         
+      <div class="subtitle">{{ error }}</div>
     </footer>
+  </form>
   </div>
 </div>
 
+
 <!-- get dem fancy typefaces -->
 <script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-
+<script type="text/javascript">
+  try {
+    Typekit.load();
+  } catch (e) {}
+</script>

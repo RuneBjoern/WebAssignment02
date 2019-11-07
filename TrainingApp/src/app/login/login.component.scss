@@ -75,10 +75,18 @@ body {
       a { padding: 4px 8px;}
     }
     .login{
+      text-align: center;
+      width: 100px;
+      height: 25px;
         color: white;
+        background-color: black;
     text-decoration: none;
+    border-radius: 2px;
     }
     .register {
+      text-align: center;
+      width: 100px;
+      height: 25px;
     text-decoration: none;
       background-color: $yellow;
       color: black;

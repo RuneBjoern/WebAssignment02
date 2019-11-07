@@ -25,8 +25,8 @@
     </header>
 
     <div class="login-form">
-            <div *ngFor="let a of aa">
-                    <a routerLink="/exercise" routerLinkActive="active" class="acdc">{{a.workoutname}}</a>
+            <div *ngFor="let w of wouts">
+                    <a routerLink="/exercise" routerLinkActive="active" class="acdc">{{w.workoutname}}</a>
       <table class="tg">
         <tr>
           <th class="tg-1wig">Exercise</th>
@@ -41,8 +41,7 @@
     <footer>
       <div class="left social-login">
         <a
-          routerLink="/login"
-          routerLinkActive="active"
+          (click) = "logout()"
           class="ui-button inactive login"
           >Log out</a
         >

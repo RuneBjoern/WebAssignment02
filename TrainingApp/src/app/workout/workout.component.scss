@@ -33,7 +33,7 @@ $yellow: #ffdd00;
 
 // lets go
 .ui-panel {
-  overflow-y: scroll; 
+  overflow: auto; 
   height:50%;
   margin: 0 auto;
   margin-top: 120px;

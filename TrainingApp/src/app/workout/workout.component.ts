@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout',
@@ -7,25 +8,39 @@ import { ApiService } from 'src/services/api.service';
   styleUrls: ['./workout.component.scss']
 })
 export class WorkoutComponent implements OnInit {
-  constructor(private api: ApiService) {}
-  public aa = []
+  constructor(private api: ApiService, private router: Router) {}
+  public wouts = []
+
   ngOnInit(){
     this.getWorkouts();
     
   }
+  
   getWorkouts(){
     this.api.getWorkout()
     .subscribe(data => {
       data.data.workouts.forEach( w => {
-        
-      this.aa.push(w)
+      if(localStorage.getItem('JWT')){
+        console.log(localStorage.getItem('JWT'))
+        if(w.ownerId == localStorage.getItem('user')){
+          this.wouts.push(w);
+        }
+      } else {
+        this.wouts.push(w)
+      }
       });
-      console.log(this.aa)
+      console.log(this.wouts)
       }, err => {
         console.log(err.message)
       }, () => {
         console.log("Complete")
       });
+  }
+
+  logout(){
+    localStorage.removeItem('JWT');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
 }

@@ -12,6 +12,7 @@ var jwt = require('jsonwebtoken');
 const app = express();
 
 app.use(cors())
+app.use(express.json());
 
 app.set('secretKey', 'nodeRestApi'); // jwt secret token
 

@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { WorkoutComponent } from './workout/workout.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,8 @@ import { ExerciseComponent } from './exercise/exercise.component';
   imports: [
     BrowserModule,       
     HttpClientModule, // import HttpClientModule after BrowserModule.
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
