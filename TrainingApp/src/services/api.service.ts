@@ -71,6 +71,23 @@ export class ApiService {
   
   }
 
+  postExercise(exercise: Exercise): Observable<any>{
+ 
+   
+    let httpWithJWT = {
+      headers: new HttpHeaders({
+        'content':"application/json",
+        'content-type':"application/json",
+        'Access-Control-Allow-Origin': '*',
+        'x-access-token': localStorage.getItem('JWT')
+      })
+    }
+
+    return this.http.post(exercisesUrl, exercise, httpWithJWT)
+    .pipe(retry(3), catchError(this.handleError<User[]>('postExercise', [])));
+  
+  }
+
   getExercises(workoutId) {
     return this.http.get<Exercise>(exercisesUrl + "/getByWorkout/" + workoutId, httpOptions)
     .pipe(retry(3), catchError(this.handleError<User[]>('getWorkout', [])));

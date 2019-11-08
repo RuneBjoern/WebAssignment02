@@ -33,17 +33,29 @@
           >{{ w.workoutname }}</a
         >
       </div>
-      <a (click)="createWorkout()" class="ui-button inactive login"
-        >Create Workout</a
-      >
+      
     </div>
 
     <footer>
+        <form
+        #createWork="ngForm"
+        (ngSubmit)="createWorkout(createWork.value)"
+      >
+        <input
+          type="text"
+          placeholder="Workout Name"
+          name="workoutFromFrontend"
+          ngModel
+        />
+        <input
+          type="submit"
+          value="Create Workout"
+          class="ui-button inactive register"
+        />
+      </form>
       <div class="left social-login">
         <a (click)="logout()" class="ui-button inactive login">Log out</a>
       </div>
-
-      
     </footer>
   </div>
 </div>

@@ -16,8 +16,8 @@ export class WorkoutComponent implements OnInit {
     
   }
 
-  createWorkout(){
-    this.api.postWorkout({workoutname: "fdscscsdddaffdssa", ownerId: localStorage.getItem('user')}).subscribe();
+  createWorkout(formValue){
+    this.api.postWorkout({workoutname: formValue.workoutFromFrontend, ownerId: localStorage.getItem('user')}).subscribe();
     this.getWorkouts();
   }
   

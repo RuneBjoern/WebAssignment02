@@ -41,13 +41,50 @@
           </tr>
         </table>
       </div>
+      
     </div>
 
     <footer>
+
+        <form
+        #EX="ngForm"
+        (ngSubmit)="createExercise(EX.value)"
+      >
+        <input
+          type="text"
+          placeholder="Exercise Name"
+          name="eName"
+          ngModel
+        />
+        <input
+          type="text"
+          placeholder="Exercise Description"
+          name="eDesc"
+          ngModel
+        />
+        <input
+          type="text"
+          placeholder="Sets"
+          name="eSets"
+          ngModel
+        />
+        <input
+          type="text"
+          placeholder="Reps"
+          name="eReps"
+          ngModel
+        />
+        <input
+          type="submit"
+          value="Create Exercise"
+          class="ui-button inactive register"
+        />
+      </form>
+
+
       <div class="left social-login">
         <a
-          routerLink="/login"
-          routerLinkActive="active"
+          (click) = "logout()"
           class="ui-button inactive login"
           >Log out</a
         >
