@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { ApiService } from "src/services/api.service";
+import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 
 @Component({
   selector: "app-exercise",
@@ -16,14 +17,15 @@ export class ExerciseComponent implements OnInit {
   public exc = [];
 
   ngOnInit() {
+    console.log(this.params.workId)
     this.getExercises(this.params.workId);
   }
 
   getExercises(workoutId) {
-    this.api.getExercises().subscribe(
+    this.api.getExercises(workoutId).subscribe(
       data => {
-        data.data.workouts.forEach(w => {
-          this.exc.push(w);
+        data.data.exercises.forEach(e => {
+          this.exc.push(e);
         });
         console.log(this.exc);
       },

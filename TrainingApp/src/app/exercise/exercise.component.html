@@ -1,9 +1,14 @@
-
 <!-- fa pls -->
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link
+  href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+  rel="stylesheet"
+/>
 
 <!-- animate.css -->
-<link href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css" rel="stylesheet" />
+<link
+  href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/67239/animate.min.css"
+  rel="stylesheet"
+/>
 
 <!-- under overlay stuff -->
 <div class="body"></div>
@@ -15,49 +20,46 @@
       <div class="left logo">
         Workout
       </div>
-      
-      <div class="right">
-      </div>
-    </header>
-    
-    <div class="login-form">
-        <table class="tg">
-            
-            <tr>
-                    <th class="tg-1wig">Exercise</th>
-                    <th class="tg-1wig">Description</th>
-                    <th class="tg-1wig">Set</th>
-                    <th class="tg-1wig">Reps</th>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Squat</td>
-                    <td class="tg-0lax">Stand with your feet spread shoulder-width apart. Lower your body as far as you can by pushing your hips back and bending your knees. Pause, and then slowly push yourself back to the starting position.</td>
-                    <td class="tg-0lax">3</td>
-                    <td class="tg-0lax">20</td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Push Ups</td>
-                    <td class="tg-0lax">Place your hands on the floor with legsstraight out behind you resting on your toes. Bend your arms and slowly ...</td>
-                    <td class="tg-0lax">3</td>
-                    <td class="tg-0lax">10</td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Plank</td>
-                    <td class="tg-0lax">Place your elbows on the floor shoulder-width apart with legs stretched out behind you so only your elbows and toes are in contact with the ground. Use your abdominal muscles to keep ...</td>
-                    <td class="tg-0lax">1</td>
-                    <td class="tg-0lax">30 sec</td>
-                  </tr>
-          </table>
 
+      <div class="right"></div>
+    </header>
+
+    <div class="login-form">
+      <div *ngFor="let e of exc">
+        <table class="tg">
+          <tr>
+            <th class="tg-1wig">Exercise</th>
+            <th class="tg-1wig">Description</th>
+            <th class="tg-1wig">Set</th>
+            <th class="tg-1wig">Reps</th>
+          </tr>
+          <tr>
+            <td class="tg-0lax">{{ e.exercisename }}</td>
+            <td class="tg-0lax">{{ e.exercisedescription }}</td>
+            <td class="tg-0lax">{{ e.numberofsets }}</td>
+            <td class="tg-0lax">{{ e.numberofreps }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
-    
+
     <footer>
       <div class="left social-login">
-            <a routerLink="/login" routerLinkActive="active" class="ui-button inactive login">Log out</a>
+        <a
+          routerLink="/login"
+          routerLinkActive="active"
+          class="ui-button inactive login"
+          >Log out</a
+        >
       </div>
-      
+
       <div class="right form-actions">
-        <a routerLink="/workout" routerLinkActive="active" class="ui-button inactive login">Show workouts</a>
+        <a
+          routerLink="/workout"
+          routerLinkActive="active"
+          class="ui-button inactive login"
+          >Show workouts</a
+        >
       </div>
     </footer>
   </div>
@@ -65,4 +67,8 @@
 
 <!-- get dem fancy typefaces -->
 <script type="text/javascript" src="//use.typekit.net/psm0wvc.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript">
+  try {
+    Typekit.load();
+  } catch (e) {}
+</script>

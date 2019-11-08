@@ -20,13 +20,14 @@ const userUrl = '/users';
 const authUrl = localUrl + userUrl + '/authenticate';
 const regUrl = localUrl + userUrl + '/register';
 
-const httpOptions ={
-  headers: new HttpHeaders({
-    'content':"application/json",
+let httpHeader = new HttpHeaders({
+  'content':"application/json",
   'content-type':"application/json",
-    'Access-Control-Allow-Origin': '*',
-    'x-access-token': ''
-  })
+  'Access-Control-Allow-Origin': '*'
+})
+
+let httpOptions ={
+  headers: httpHeader
 };
 
 
@@ -54,12 +55,26 @@ export class ApiService {
   }
 
   postWorkout(workout: Workout): Observable<any>{
-    httpOptions.headers.set('x-access-token', localStorage.getItem("JWT"))
-    return this.http.post(workoutsUrl, workout, httpOptions)
+ 
+   
+    let httpWithJWT = {
+      headers: new HttpHeaders({
+        'content':"application/json",
+        'content-type':"application/json",
+        'Access-Control-Allow-Origin': '*',
+        'x-access-token': localStorage.getItem('JWT')
+      })
+    }
+
+    return this.http.post(workoutsUrl, workout, httpWithJWT)
     .pipe(retry(3), catchError(this.handleError<User[]>('postWorkout', [])));
+  
   }
 
-
+  getExercises(workoutId) {
+    return this.http.get<Exercise>(exercisesUrl + "/getByWorkout/" + workoutId, httpOptions)
+    .pipe(retry(3), catchError(this.handleError<User[]>('getWorkout', [])));
+  }
 
   private handleError<T>(operation = 'operation', result?:T){
     return (error: any): Observable<T> => {

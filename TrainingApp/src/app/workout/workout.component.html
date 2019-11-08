@@ -25,40 +25,25 @@
     </header>
 
     <div class="login-form">
-            <div *ngFor="let w of wouts">
-                    <a routerLink="/exercise" routerLinkActive="active" class="acdc">{{w.workoutname}}</a>
-      <table class="tg">
-        <tr>
-          <th class="tg-1wig">Exercise</th>
-          <th class="tg-1wig">Description</th>
-          <th class="tg-1wig">Set</th>
-          <th class="tg-1wig">Reps</th>
-        </tr>
-      </table>
-    </div>
-    <a
-          (click) = "createWorkout()"
-          class="ui-button inactive login"
-    >Create Workout</a>
+      <div *ngFor="let w of wouts">
+        <a
+          routerLink="/exercise/{{ w.id }}"
+          routerLinkActive="active"
+          class="acdc"
+          >{{ w.workoutname }}</a
+        >
+      </div>
+      <a (click)="createWorkout()" class="ui-button inactive login"
+        >Create Workout</a
+      >
     </div>
 
     <footer>
       <div class="left social-login">
-        <a
-          (click) = "logout()"
-          class="ui-button inactive login"
-          >Log out</a
-        >
+        <a (click)="logout()" class="ui-button inactive login">Log out</a>
       </div>
 
-      <div class="right form-actions">
-        <a
-          routerLink="/exercise"
-          routerLinkActive="active"
-          class="ui-button inactive login"
-          >Show all exercises</a
-        >
-      </div>
+      
     </footer>
   </div>
 </div>

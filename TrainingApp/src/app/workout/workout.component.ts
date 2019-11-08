@@ -17,16 +17,17 @@ export class WorkoutComponent implements OnInit {
   }
 
   createWorkout(){
-    console.log("Creating workout")
-    this.api.postWorkout({workoutname: "Ny", ownerId: localStorage.getItem('user')})
+    this.api.postWorkout({workoutname: "fdscscsdddaffdssa", ownerId: localStorage.getItem('user')}).subscribe();
+    this.getWorkouts();
   }
   
   getWorkouts(){
     this.api.getWorkout()
     .subscribe(data => {
+      this.wouts = []
       data.data.workouts.forEach( w => {
       if(localStorage.getItem('JWT')){
-        console.log(localStorage.getItem('JWT'))
+        
         if(w.ownerId == localStorage.getItem('user')){
           this.wouts.push(w);
         }
@@ -40,6 +41,10 @@ export class WorkoutComponent implements OnInit {
       }, () => {
         console.log("Complete")
       });
+  }
+
+  getExercises(){
+
   }
 
   logout(){
