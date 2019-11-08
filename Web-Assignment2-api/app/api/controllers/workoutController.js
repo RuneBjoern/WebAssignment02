@@ -73,11 +73,11 @@ module.exports = {
 	},
 
 	create: function(req, res, next) {
-		workoutModel.create({ workoutname: workout.workoutname, ownerId: workout.ownerId }, function (err, result) {
+		workoutModel.create({ workoutname: req.body.workoutname, ownerId: req.body.ownerId }, function (err, result) {
 				  if (err) 
 				  	next(err);
 				  else
-				  	res.json({status: "success", message: "Workout added", data: null});
+				  	res.json({status: "success", message: "Workout added", data: result});
 				  
 				});
 	},

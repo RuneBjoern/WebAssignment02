@@ -15,6 +15,7 @@ import { Exercise } from 'src/app/exercise';
 
 const localUrl = 'http://localhost:5000';
 const workoutsUrl = localUrl + '/workouts';
+const exercisesUrl = localUrl + '/exercises';
 const userUrl = '/users';
 const authUrl = localUrl + userUrl + '/authenticate';
 const regUrl = localUrl + userUrl + '/register';
